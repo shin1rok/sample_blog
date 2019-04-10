@@ -1,50 +1,53 @@
 class Users::PostsController < ApplicationController
-  before_action :set_users_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users_posts = Users::Post.all
+    @posts = Post.where(user_id: User.first.id)
+    # @users_posts = current_user.posts
   end
 
   def show
   end
 
   def new
-    @users_post = Users::Post.new
+    @post = Post.new
   end
 
   def edit
   end
 
   def create
-    @users_post = Users::Post.new(users_post_params)
+    @post = Post.new(post_params.merge(user_id: User.first.id))
+    # @post = current_user.posts.new(post_params)
 
-    if @users_post.save
-      redirect_to @users_post, notice: 'Post was successfully created.'
+    if @post.save
+      redirect_to users_post_path(id: @post.id), notice: 'Post was successfully created.'
     else
       render :new
     end
   end
 
   def update
-    if @users_post.update(users_post_params)
-      redirect_to @users_post, notice: 'Post was successfully updated.'
+    if @post.update(post_params)
+      redirect_to users_post_path(id: @post.id), notice: 'Post was successfully updated.'
     else
       render :edit
     end
   end
 
   def destroy
-    @users_post.destroy
-    redirect_to users_posts_url, notice: 'Post was successfully destroyed.'
+    @post.destroy
+    redirect_to users_posts_path, notice: 'Post was successfully destroyed.'
   end
 
   private
 
-  def set_users_post
-    @users_post = Users::Post.find(params[:id])
+  def set_post
+    @post = Post.find(params[:id])
+    # @post = current_user.posts.find(params[:id])
   end
 
-  def users_post_params
-    params.fetch(:users_post, {})
+  def post_params
+    params.require(:post).permit(:title, :content)
   end
 end
