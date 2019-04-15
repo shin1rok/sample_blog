@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'pages/show'
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'pages#index'
+  root to: 'posts#index'
 
   scope '/:username', module: 'users', as: :users do
     resources :posts
