@@ -16,9 +16,9 @@
       </div>
       <div class="card-body">
         <ul class="nav nav-tabs">
-          <li class="nav-item"><a href="#" class="nav-link active">1日</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">週間</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">月間</a></li>
+          <li class="nav-item"><%= posts_trends_link '1日', :daily, @active %></li>
+          <li class="nav-item"><%= posts_trends_link '週間', :weekly, @active %></li>
+          <li class="nav-item"><%= posts_trends_link '月間', :monthly, @active %></li>
         </ul>
         <table class="mt-3">
           <tbody>
@@ -26,7 +26,7 @@
             <tr>
               <td><%= post.title %></td>
               <td><%= post.content %></td>
-              <td><%= post.user %></td>
+              <td><%= post.created_at %></td>
               <td><%= link_to 'Show', post %></td>
             </tr>
           <% end %>
