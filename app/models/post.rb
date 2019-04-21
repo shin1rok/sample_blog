@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
 
+  enum status: { draft: 0, published: 1, restricted: 2, unpublished: 3 }
+
   validates :title, presence: true, length: { maximum: 256 }
   validates :content, presence: true, length: { maximum: 65_535 }
 
