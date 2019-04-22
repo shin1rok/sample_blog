@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  web:
+    build:
+      context: .
+    environment:
+      - DB_HOST=db
+    volumes:
+      - ${RAILS_VOLUME:-.:/sample_blog}
+      - bundle_volume:/usr/local/bundle
+    networks:
+      - sample_blog
+    ports:
+      - ${RAILS_PUBLISH_PORTS:-3000:3000}
+    depends_on:
+      - db
+  db:
+    image: postgres:9.6
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    networks:
+      - sample_blog
+    ports:
+      - 15434:5432
+volumes:
+  bundle_volume:
+  db_volume:
+networks:
+  sample_blog:
