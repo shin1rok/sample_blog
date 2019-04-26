@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
   scope '/:username', module: 'users', as: :users do
     resources :posts
+    resources :drafts
   end
 end

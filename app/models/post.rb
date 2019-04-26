@@ -21,4 +21,7 @@ class Post < ApplicationRecord
   scope :daily, -> { where(created_at: Time.current.beginning_of_day...Time.current.end_of_day) }
   scope :weekly, -> { where(created_at: Time.current.ago(7.days).beginning_of_day...Time.current.end_of_day) }
   scope :monthly, -> { where(created_at: Time.current.ago(31.days).beginning_of_day...Time.current.end_of_day) }
+
+  scope :drafts, -> { where(status: :draft) }
+  scope :latest_draft, -> { order(updated_at: :desc).first }
 end
