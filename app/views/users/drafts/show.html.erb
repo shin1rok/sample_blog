@@ -3,11 +3,11 @@
     <div class="card">
       <div class="card-header">
         下書き一覧
-        <%= link_to_unturbolinks('作成', new_users_post_path, 'btn btn-outline-dark btn-sm float-right') %>
+        <%= link_to_unturbolinks('作成', new_users_post_path, 'btn btn-outline-dark btn-sm float-right') if @drafts.count < Post::MAX_DRAFT %>
       </div>
       <div class="card-body">
         <ul class="nav nav-tabs">
-          <li class="nav-item"><%= link_to '未投稿', users_drafts_path(current_user.url_name), class: 'nav-link active' %></li>
+          <li class="nav-item"><%= link_to "未投稿(#{@drafts.count}/10)", users_drafts_path(current_user.url_name), class: 'nav-link active' %></li>
           <!-- 投稿済みのドラフトに違和感-->
           <li class="nav-item"><%= link_to '投稿済み', nil, class: 'nav-link' %></li>
         </ul>

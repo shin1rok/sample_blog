@@ -1,4 +1,5 @@
 class Users::PostsController < ApplicationController
+  before_action :prohibit_keeping_drafts_more_than_10, only: %i[new create]
   before_action :set_post, only: %i[edit update destroy]
 
   def index
@@ -47,6 +48,13 @@ class Users::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content, :status)
+  end
+
+  def prohibit_keeping_drafts_more_than_10
+    if current_user.drafts.count >= Post::MAX_DRAFT
+      redirect_to users_drafts_path, notice: '保存できる下書きは10件までです。'
+      return
+    end
   end
 
   def redirect_depending_on_status

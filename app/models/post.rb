@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  MAX_DRAFT = 10
+
   belongs_to :user
 
   enum status: { draft: 0, published: 1, restricted: 2, unpublished: 3 }
