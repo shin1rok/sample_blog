@@ -36,7 +36,7 @@ class Users::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to users_posts_path, notice: 'Post was successfully destroyed.'
+    redirect_to users_drafts_path(current_user.url_name), notice: '削除しました。'
   end
 
   private
