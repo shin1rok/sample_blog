@@ -21,4 +21,6 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+## 実装方針
+### PostモデルとDraftの関係
+- Postが実態でDraftはPostの状態である

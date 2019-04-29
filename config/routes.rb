@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts, only: [:index, :show]
+  resources :posts, only: %i[index show]
   get 'pages/index'
   get 'pages/show'
   devise_for :users
@@ -12,6 +12,6 @@ Rails.application.routes.draw do
 
   scope '/:username', module: 'users', as: :users do
     resources :posts
-    resources :drafts
+    resources :drafts, only: %i[index show]
   end
 end

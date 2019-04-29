@@ -1,27 +1,26 @@
 class Users::PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: %i[edit update destroy]
 
   def index
-    @posts = Post.where(user_id: User.first.id)
-    # @users_posts = current_user.posts
+    redirect_to users_path(params[:username])
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def new
-    @post = Post.new
+    @post = Post.new(status: :draft)
   end
 
   def edit
   end
 
   def create
-    @post = Post.new(post_params.merge(user_id: User.first.id))
-    # @post = current_user.posts.new(post_params)
+    @post = current_user.posts.new(post_params)
 
     if @post.save
-      redirect_to users_post_path(id: @post.id), notice: 'Post was successfully created.'
+      redirect_depending_on_status
     else
       render :new
     end
@@ -29,7 +28,7 @@ class Users::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to users_post_path(id: @post.id), notice: 'Post was successfully updated.'
+      redirect_depending_on_status
     else
       render :edit
     end
@@ -43,11 +42,23 @@ class Users::PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find(params[:id])
-    # @post = current_user.posts.find(params[:id])
+    @post = current_user.posts.find(params[:id])
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :status)
+  end
+
+  def redirect_depending_on_status
+    if @post.draft?
+      redirect_to users_draft_path(username: current_user.url_name, id: @post.id), notice: notice_comment
+    else
+      redirect_to users_post_path(username: current_user.url_name, id: @post.id), notice: notice_comment
+    end
+  end
+
+  # TODO concernとかで切り出す
+  def notice_comment
+    action_name == 'create' ? '登録しました。' : '更新しました。'
   end
 end
