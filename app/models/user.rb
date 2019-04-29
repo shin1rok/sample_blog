@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :confirmable, :validatable
 
   has_many :posts
+  has_many :drafts, -> { drafts }, class_name: 'Post'
 end

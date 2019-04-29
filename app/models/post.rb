@@ -1,5 +1,9 @@
 class Post < ApplicationRecord
+  MAX_DRAFT = 10
+
   belongs_to :user
+
+  enum status: { draft: 0, published: 1, restricted: 2, unpublished: 3 }
 
   validates :title, presence: true, length: { maximum: 256 }
   validates :content, presence: true, length: { maximum: 65_535 }
@@ -19,4 +23,7 @@ class Post < ApplicationRecord
   scope :daily, -> { where(created_at: Time.current.beginning_of_day...Time.current.end_of_day) }
   scope :weekly, -> { where(created_at: Time.current.ago(7.days).beginning_of_day...Time.current.end_of_day) }
   scope :monthly, -> { where(created_at: Time.current.ago(31.days).beginning_of_day...Time.current.end_of_day) }
+
+  scope :drafts, -> { where(status: :draft) }
+  scope :latest_draft, -> { order(updated_at: :desc).first }
 end

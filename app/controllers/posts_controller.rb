@@ -6,7 +6,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    post = Post.find(params[:id])
+    redirect_to users_post_path(username: post.user.url_name, id: post.id)
   end
 
   private
