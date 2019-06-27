@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: sample_blog_dev
+  username: <%= ENV.fetch('DB_USER', 'postgres') %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
+
+test:
+  <<: *default
+  database: sample_blog_test
+  username: <%= ENV.fetch('DB_USER', 'postgres') %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
+
+production:
+  <<: *default
+  database: sample_blog
+  username: <%= ENV['PROD_DB_USER'] %>
+  password: <%= ENV['PROD_DB_PASSWORD'] %>
+  host: <%= ENV['PROD_DB_HOST'] %>
