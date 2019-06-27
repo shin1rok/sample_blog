@@ -40,4 +40,7 @@ docker-compose down
 
 # Gem追加、更新
 docker-compose run --rm web bundle install
+
+# RuboCop
+docker-compose run --rm web rubocop
 ```

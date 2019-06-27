@@ -50,11 +50,12 @@ class Users::PostsController < ApplicationController
     params.require(:post).permit(:title, :content, :status)
   end
 
+  # TODO: バリデーションで実装できそう
   def prohibit_keeping_drafts_more_than_10
-    if current_user.drafts.count >= Post::MAX_DRAFT
-      redirect_to users_drafts_path, notice: '保存できる下書きは10件までです。'
-      return
-    end
+    return if current_user.drafts.count < Post::MAX_DRAFT
+
+    redirect_to users_drafts_path, notice: '保存できる下書きは10件までです。'
+    return
   end
 
   def redirect_depending_on_status
@@ -65,7 +66,7 @@ class Users::PostsController < ApplicationController
     end
   end
 
-  # TODO concernとかで切り出す
+  # TODO: concernとかで切り出す
   def notice_comment
     action_name == 'create' ? '登録しました。' : '更新しました。'
   end

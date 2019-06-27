@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "posts/show", type: :view do
   before(:each) do
     @post = assign(:post, Post.create!(
-      :title => "Title",
-      :content => "MyText",
-      :user => nil
+      title:   'Title',
+      content: 'MyText',
+      user:    nil
     ))
   end
 
