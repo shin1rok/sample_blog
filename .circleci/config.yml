@@ -1,10 +1,25 @@
 version: 2
 jobs:
   build:
-    machine: true
+    machine:
+      image: circleci/classic:edge
     steps:
     - checkout
-    - run: docker-compose build
-    - run: docker-compose run --rm web bin/rails db:create RAILS_ENV=test
-    - run: docker-compose run --rm web bin/rails db:migrate RAILS_ENV=test
-    - run: docker-compose run --rm web rubocop
+    - run:
+        name: docker-compose build
+        command: docker-compose build
+    - run:
+        name: docker-compose up
+        command: docker-compose up -d
+    - run:
+        name: sleep for waiting launch db
+        command: sleep 1
+    - run:
+        name: "before_test: setup db"
+        command: docker-compose run web rails db:create db:migrate RAILS_ENV=test
+    - run:
+        name: test
+        command: docker-compose run web rubocop
+    - run:
+        name: docker-compose down
+        command: docker-compose down
