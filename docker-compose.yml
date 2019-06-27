@@ -20,6 +20,7 @@ services:
       - db_volume:/var/lib/postgresql/data
     networks:
       - sample_blog
+    # 本番で使わないので今のところは空けておく
     ports:
       - 15434:5432
 volumes:
