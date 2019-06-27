@@ -1,9 +1,13 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/sample_blog
+    working_directory: /sample_blog
 
     # Primary container image where all commands run
+    - run:
+        name: Docker build
+        command: docker-compose build
+
 
     docker:
     - image: Dockerfile
