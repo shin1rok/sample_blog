@@ -34,12 +34,12 @@ jobs:
     - checkout
     - run:
         name: setup
-          command: |
-            docker-compose run web rails db:create RAILS_ENV=test
-            docker-compose run web rails db:migrate RAILS_ENV=test
+        command: |
+          docker-compose run web rails db:create RAILS_ENV=test
+          docker-compose run web rails db:migrate RAILS_ENV=test
     - run:
         name: rubocop
-          command: docker-compose run web rubocop
+        command: docker-compose run web rubocop
 workflows:
   version: 2
   build:
