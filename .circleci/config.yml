@@ -29,21 +29,36 @@ jobs:
         - cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         - cache-v1-{{ arch }}-{{ .Branch }}
         - cache-v1
+        paths: ~/caches/images.tar
+    - run:
+        name: docker load
+        command: |
+          set +o pipefail
+          docker load -i ~/caches/images.tar | true
     - run:
         name: build
         command: docker-compose build
+    - run:
+        name: docker save
+        command: |
+          mkdir -p ~/caches
+          docker save $(docker images -q) -o ~/caches/images.tar
     - save_cache:
         key: cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        paths:
-        - .
+        paths: ~/caches/images.tar
   test:
     machine:
       image: circleci/classic:edge
     steps:
     - checkout
     - restore_cache:
-        keys:
-        - cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        keys: cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        paths: ~/caches/images.tar
+    - run:
+        name: docker load
+        command: |
+          set +o pipefail
+          docker load -i ~/caches/images.tar | true
     - run:
         name: setup
         command: |
