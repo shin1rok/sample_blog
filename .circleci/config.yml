@@ -19,39 +19,33 @@
 
 version: 2
 jobs:
-  generate_cache:
+  build:
     machine:
       image: circleci/classic:edge
     steps:
     - checkout
-    - restore_cache:
-        key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
-        paths: ~/caches/images.tar
-    - run: docker-compose build
     - run:
-        command: |
-          mkdir -p ~/caches
-          docker save $(docker images -q) -o ~/caches/images.tar
-    - save_cache:
-        key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
-        paths: ~/caches/images.tar
+        name: build
+        command: docker-compose build
   test:
     machine:
       image: circleci/classic:edge
-    # parallelism: 3 # 並列化したいときはparallelismを利用する
     steps:
     - checkout
-    - restore_cache:
-        key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
-        paths: ~/caches/images.tar
-    - run: docker-compose pull # 早い
-    - run: docker-compose build # 早い
-    - run: docker-compose run web rails db:create RAILS_ENV=test
+    - run:
+        name: setup
+          command: |
+            docker-compose run web rails db:create RAILS_ENV=test
+            docker-compose run web rails db:migrate RAILS_ENV=test
+    - run:
+        name: rubocop
+          command: docker-compose run web rubocop
+
 workflows:
   version: 2
   build:
     jobs:
-    - generate_cache
+    - build
     - test:
         requires:
-        - generate_cache
+        - build
