@@ -26,9 +26,9 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - cache-v3-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - cache-v3-{{ arch }}-{{ .Branch }}
-        - cache-v3
+        - cache-v4-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - cache-v4-{{ arch }}-{{ .Branch }}
+        - cache-v4
         paths: ~/caches/images.tar
     - run:
         name: docker load
@@ -44,7 +44,7 @@ jobs:
           mkdir -p ~/caches
           docker save $(docker images | awk 'NR>=2 && ! /^<none>/{print $1}') -o ~/caches/images.tar
     - save_cache:
-        key: cache-v3-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        key: cache-v4-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         paths: ~/caches/images.tar
   test:
     machine:
@@ -52,7 +52,7 @@ jobs:
     steps:
     - checkout
     - restore_cache:
-        key: cache-v3-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        key: cache-v4-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         paths: ~/caches/images.tar
     - run:
         name: docker load
