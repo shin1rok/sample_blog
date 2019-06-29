@@ -9,13 +9,10 @@ jobs:
         name: build
         command: docker-compose build
     - run:
-        name: docker-compose up
-        command: docker-compose up -d
-    - run:
         name: setup
         command: |
-          - docker-compose run web rails db:create RAILS_ENV=test
-          - docker-compose run web rails db:migrate RAILS_ENV=test
+          docker-compose run web rails db:create RAILS_ENV=test
+          docker-compose run web rails db:migrate RAILS_ENV=test
     - run:
         name: rubocop
         command: docker-compose run web rubocop
