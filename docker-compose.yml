@@ -3,6 +3,7 @@ services:
   web:
     build:
       context: .
+    image: web
     environment:
       - DB_HOST=db
     volumes:
