@@ -20,7 +20,7 @@
 version: 2
 jobs:
   generate_cache:
-    machine: true
+    machine: circleci/classic:edge
     steps:
     - checkout
     - restore_cache:
@@ -35,11 +35,10 @@ jobs:
         key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
         paths: ~/caches/images.tar
   test:
-    machine: true
+    machine: circleci/classic:edge
     # parallelism: 3 # 並列化したいときはparallelismを利用する
     steps:
     - checkout
-    - run: pip install docker-compose
     - restore_cache:
         key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
         paths: ~/caches/images.tar
