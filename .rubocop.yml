@@ -7,6 +7,8 @@ Layout/AlignHash:
 
 Layout/EmptyLinesAroundBlockBody:
   EnforcedStyle: no_empty_lines
+  Exclude:
+    - db/schema.rb
 
 Layout/IndentFirstArgument:
   Enabled: false
@@ -18,7 +20,8 @@ Metrics/MethodLength:
 
 Metrics/BlockLength:
   Exclude:
-  - spec/**/*
+    - db/schema.rb
+    - spec/**/*
 
 # Style
 Style/Documentation:
@@ -28,7 +31,7 @@ Style/AsciiComments:
   Enabled: false
 
 Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
+  Enabled: false
 
 Style/EmptyMethod:
   Enabled: false
