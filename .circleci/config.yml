@@ -42,7 +42,7 @@ jobs:
         name: docker save
         command: |
           mkdir -p ~/caches
-          docker save $(docker images -q) -o ~/caches/images.tar
+          docker save $(docker images | awk 'NR>=2 && ! /^<none>/{print $1}') -o ~/caches/images.tar
     - save_cache:
         key: cache-v3-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         paths: ~/caches/images.tar
