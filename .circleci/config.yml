@@ -27,8 +27,6 @@ jobs:
     - restore_cache:
         keys:
         - cache-v5-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - cache-v5-{{ arch }}-{{ .Branch }}
-        - cache-v5
         paths: ~/caches/images.tar
     - run:
         name: docker load
