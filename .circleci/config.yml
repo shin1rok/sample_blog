@@ -20,7 +20,8 @@
 version: 2
 jobs:
   generate_cache:
-    machine: circleci/classic:edge
+    machine:
+      image: circleci/classic:edge
     steps:
     - checkout
     - restore_cache:
@@ -35,7 +36,8 @@ jobs:
         key: docker-{{ .Branch }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
         paths: ~/caches/images.tar
   test:
-    machine: circleci/classic:edge
+    machine:
+      image: circleci/classic:edge
     # parallelism: 3 # 並列化したいときはparallelismを利用する
     steps:
     - checkout
