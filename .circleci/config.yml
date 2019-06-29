@@ -52,7 +52,7 @@ jobs:
     steps:
     - checkout
     - restore_cache:
-        keys: cache-v2-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        key: cache-v2-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         paths: ~/caches/images.tar
     - run:
         name: docker load
