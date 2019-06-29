@@ -26,14 +26,14 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - gem-cache-{{ arch }}-{{ .Branch }}
-        - gem-cache
+        - cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - cache-v1-{{ arch }}-{{ .Branch }}
+        - cache-v1
     - run:
         name: build
         command: docker-compose build
     - save_cache:
-        key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        key: cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         paths:
         - .
   test:
@@ -41,6 +41,9 @@ jobs:
       image: circleci/classic:edge
     steps:
     - checkout
+    - restore_cache:
+        keys:
+        - cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
     - run:
         name: setup
         command: |
@@ -55,5 +58,5 @@ workflows:
     jobs:
     - build
     - test:
-        requires:
-        - build
+#        requires:
+#        - build
