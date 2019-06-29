@@ -6,16 +6,16 @@ jobs:
     steps:
     - checkout
     - run:
-        name: docker-compose build
+        name: build
         command: docker-compose build
     - run:
         name: docker-compose up
         command: docker-compose up -d
     - run:
-        name: "before_test: setup db"
+        name: setup
         command: |
           - docker-compose run web rails db:create RAILS_ENV=test
           - docker-compose run web rails db:migrate RAILS_ENV=test
     - run:
-        name: test
+        name: rubocop
         command: docker-compose run web rubocop
