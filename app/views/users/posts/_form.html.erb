@@ -1,4 +1,4 @@
-<%= form_with(model: post, url: users_posts_or_post_path(post), local: true) do |form| %>
+<%= form_with(model: post, url: posts_or_post_path(post), local: true) do |form| %>
   <%= form.hidden_field(:status) %>
   <% if post.errors.any? %>
     <div id="error_explanation">

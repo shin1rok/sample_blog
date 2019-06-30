@@ -23,7 +23,8 @@ namespace :sample_data do
     30.times do |n|
       Post.create!(title:   "タイトル#{n}",
                    content: "コンテンツ#{n}",
-                   user_id: users.sample.id)
+                   user_id: users.sample.id,
+                   status:  Post.statuses.to_a.sample[0])
     end
   end
 end

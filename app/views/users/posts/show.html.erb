@@ -10,5 +10,8 @@
   <%= @post.content %>
 </p>
 
+<% if @post.user.id == current_user&.id %>
 <%= link_to 'Edit', edit_users_post_path(id: @post.id) %> |
+
 <%= link_to 'Back', users_posts_path %>
+<% end %>

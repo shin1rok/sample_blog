@@ -21,6 +21,7 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   Exclude:
     - db/schema.rb
+    - lib/**/*
     - spec/**/*
 
 # Style
