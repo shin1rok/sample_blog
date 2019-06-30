@@ -3,11 +3,12 @@ class Users::PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
 
   def index
-    redirect_to users_path(params[:username])
+    @posts = Post.all.order(created_at: :desc)
   end
 
   def show
-    @post = Post.find(params[:id])
+    post = Post.find(params[:id])
+    redirect_to user_name_post_path(username: post.user.url_name, id: post.id)
   end
 
   def new
@@ -60,9 +61,9 @@ class Users::PostsController < ApplicationController
 
   def redirect_depending_on_status
     if @post.draft?
-      redirect_to users_draft_path(username: current_user.url_name, id: @post.id), notice: notice_comment
+      redirect_to user_name_draft_path(username: current_user.url_name, id: @post.id), notice: notice_comment
     else
-      redirect_to users_post_path(username: current_user.url_name, id: @post.id), notice: notice_comment
+      redirect_to post_path(username: current_user.url_name, id: @post.id), notice: notice_comment
     end
   end
 

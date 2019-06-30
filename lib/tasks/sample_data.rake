@@ -24,7 +24,7 @@ namespace :sample_data do
       Post.create!(title:   "タイトル#{n}",
                    content: "コンテンツ#{n}",
                    user_id: users.sample.id,
-                   status: Post.statuses.to_a.sample[0])
+                   status:  Post.statuses.to_a.sample[0])
     end
   end
 end

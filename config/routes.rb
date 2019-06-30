@@ -1,17 +1,15 @@
 Rails.application.routes.draw do
-  resources :posts, only: %i[index show]
-  get 'pages/index'
-  get 'pages/show'
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'posts#index'
+  root to: 'users/pages#top'
 
-  scope '/:username', as: :users do
-    get '/', to: 'users#show'
+  devise_for :users
+
+  scope module: :users do
+    resources :posts
   end
 
-  scope '/:username', module: 'users', as: :users do
-    resources :posts
-    resources :drafts, only: %i[index show]
+  scope '/:username', as: :user_name do
+    get '/', to: 'users/users#show'
+    resources :posts, only: %i[show], controller: 'users/user_posts'
+    resources :drafts, only: %i[index show], controller: 'users/drafts'
   end
 end

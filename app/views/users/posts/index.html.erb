@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header">
+        すべての記事
+      </div>
+      <div class="card-body">
+        <table class="mt-3">
+          <tbody>
+<!--          TODO: 見た目修正-->
+          <% @posts.each do |post| %>
+            <tr>
+              <td><%= post.title %></td>
+              <td><%= post.content %></td>
+              <td><%= post.created_at %></td>
+              <td><%= link_to 'Show', post %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header">
+        右側
+      </div>
+      <div class="card-body">
+        何かいい感じのコンテンツ
+      </div>
+    </div>
+  </div>
+</div>
