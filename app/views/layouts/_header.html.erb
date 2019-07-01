@@ -1,0 +1,76 @@
+<header class="bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Sample Blog</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ホーム
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              コミュニティ
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="ml-lg-3">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="#">ストック一覧</a>
+            </li>
+            <li class="nav-item mx-1">
+              <form class="form-inline">
+                <button class="btn btn-outline-primary" type="button">投稿する</button>
+              </form>
+            </li>
+            <li class="nav-item mx-1">
+              <button type="button" class="btn btn-primary">
+                <span class="badge badge-light">4</span>
+              </button>
+            </li>
+            <li class="nav-item dropdown mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                設定
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <%= link_to 'マイページ', user_name_path(current_user.url_name), class: 'dropdown-item' %>
+                <div class="dropdown-divider"></div>
+                <%= link_to '下書き一覧', user_name_drafts_path(current_user.url_name), class: 'dropdown-item' %>
+                <%= link_to '編集リクエスト一覧', nil, class: 'dropdown-item' %>
+                <div class="dropdown-divider"></div>
+                <%= link_to '設定', edit_user_registration_path, class: 'dropdown-item' %>
+                <%= link_to 'ヘルプ', nil, class: 'dropdown-item' %>
+                <div class="dropdown-divider"></div>
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+              </div>
+            </li>
+          <% else %>
+            <li><%= link_to 'サインアップ', new_user_registration_path, class: 'dropdown-item' %></li>
+            <li><%= link_to 'ログイン', new_user_session_path, class: 'dropdown-item' %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-3">
+    <div class="card">
+      <%= image_tag('beer_pen.png', class: 'card-img-top') %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @user.url_name %></h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="card">
+      <%= image_tag('pie_chart.png', class: 'card-img-top') %>
+      <div class="card-body">
+      <nav class="nav nav-pills nav-justified">
+        <a class="nav-item nav-link active" href="#">
+          <p>100</p>
+          <p>Items</p>
+        </a>
+        <a class="nav-item nav-link" href="#">
+          <p>100</p>
+          <p>Contribution</p>
+        </a>
+        <a class="nav-item nav-link" href="#">
+          <p>100</p>
+          <p>Followers</p>
+        </a>
+      </nav>
+      </div>
+      <div class="card-body">
+        <ul class="nav nav-tabs">
+          <li class="nav-item"><%= link_to '最近の記事', nil, class: 'nav-link active' %></li>
+          <li class="nav-item"><%= link_to 'いいねした記事', nil, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to 'コメント', nil, class: 'nav-link' %></li>
+        </ul>
+        <ul class="list-group list-group-flush">
+          <% Post.all.limit(20).each do |post| %>
+            <%= render 'post', user: @user, post: post %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

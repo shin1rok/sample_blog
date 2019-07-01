@@ -1,24 +1,46 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## バージョン
+- Ruby: 2.6.3
+- Rails: 5.2.3
+- PostgreSQL: 11.3
 
-Things you may want to cover:
+## 環境構築
+### ローカル
+```
+bundle install --path vendor/bundle
+bundle exec rails db:create
+bundle exec rails db:migrate
+bundle exec rails db:seed
 
-* Ruby version
+# テスト, Linter
+bundle exec rspec
+bundle exec rubocop
+```
 
-* System dependencies
+### Docker
+```
+# イメージ作成
+docker-compose build
 
-* Configuration
+# DBセットアップ
+docker-compose run --rm web bin/rails db:create
+docker-compose run --rm web bin/rails db:migrate
+docker-compose run --rm web bin/rails db:seed
 
-* Database creation
+# 起動、停止
+docker-compose up
+docker-compose down
 
-* Database initialization
+# Gem追加、更新
+docker-compose run --rm web bundle install
 
-* How to run the test suite
+# テスト, Linter
+docker-compose run --rm web rspec
+docker-compose run --rm web rubocop
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## 実装方針
+### PostモデルとDraftの関係
+- Postが実態でDraftはPostの状態である
 
-* Deployment instructions
-
-* ...
