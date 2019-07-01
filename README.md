@@ -1,5 +1,14 @@
 # README
 
+Sample Blog (https://shin1rok-blog-app.herokuapp.com/)
+
+個人の学習用として作成しているものなので、ブログサービスとしての利用はしないでください。(そもそも機能が足りなすぎて使えないとは思いますが。)
+
+適当に触ってみるなどは構いません。
+フィードバック歓迎です。
+
+データは定期的に削除します。
+
 ## バージョン
 - Ruby: 2.6.3
 - Rails: 5.2.3
@@ -38,6 +47,19 @@ docker-compose run --rm web bundle install
 # テスト, Linter
 docker-compose run --rm web rspec
 docker-compose run --rm web rubocop
+```
+
+## デプロイ
+### 初回
+```
+heroku login
+heroku create shin1rok-blog-app
+```
+
+### 2回目以降
+```
+git push heroku master
+heroku run rails db:migrate
 ```
 
 ## 実装方針
