@@ -41,7 +41,7 @@ RSpec.describe Users::PostsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "returns a success response" do
+    xit "returns a success response" do
       Users::Post.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
@@ -49,7 +49,7 @@ RSpec.describe Users::PostsController, type: :controller do
   end
 
   describe "GET #show" do
-    it "returns a success response" do
+    xit "returns a success response" do
       post = Users::Post.create! valid_attributes
       get :show, params: { id: post.to_param }, session: valid_session
       expect(response).to be_successful
@@ -57,14 +57,14 @@ RSpec.describe Users::PostsController, type: :controller do
   end
 
   describe "GET #new" do
-    it "returns a success response" do
+    xit "returns a success response" do
       get :new, params: {}, session: valid_session
       expect(response).to be_successful
     end
   end
 
   describe "GET #edit" do
-    it "returns a success response" do
+    xit "returns a success response" do
       post = Users::Post.create! valid_attributes
       get :edit, params: { id: post.to_param }, session: valid_session
       expect(response).to be_successful
@@ -73,20 +73,20 @@ RSpec.describe Users::PostsController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new Users::Post" do
+      xit "creates a new Users::Post" do
         expect do
           post :create, params: { users_post: valid_attributes }, session: valid_session
         end.to change(Users::Post, :count).by(1)
       end
 
-      it "redirects to the created users_post" do
+      xit "redirects to the created users_post" do
         post :create, params: { users_post: valid_attributes }, session: valid_session
         expect(response).to redirect_to(Users::Post.last)
       end
     end
 
     context "with invalid params" do
-      it "returns a success response (i.e. to display the 'new' template)" do
+      xit "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { users_post: invalid_attributes }, session: valid_session
         expect(response).to be_successful
       end
@@ -99,14 +99,14 @@ RSpec.describe Users::PostsController, type: :controller do
         skip("Add a hash of attributes valid for your model")
       end
 
-      it "updates the requested users_post" do
+      xit "updates the requested users_post" do
         post = Users::Post.create! valid_attributes
         put :update, params: { id: post.to_param, users_post: new_attributes }, session: valid_session
         post.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the users_post" do
+      xit "redirects to the users_post" do
         post = Users::Post.create! valid_attributes
         put :update, params: { id: post.to_param, users_post: valid_attributes }, session: valid_session
         expect(response).to redirect_to(post)
@@ -114,7 +114,7 @@ RSpec.describe Users::PostsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
+      xit "returns a success response (i.e. to display the 'edit' template)" do
         post = Users::Post.create! valid_attributes
         put :update, params: { id: post.to_param, users_post: invalid_attributes }, session: valid_session
         expect(response).to be_successful
@@ -123,14 +123,14 @@ RSpec.describe Users::PostsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested users_post" do
+    xit "destroys the requested users_post" do
       post = Users::Post.create! valid_attributes
       expect do
         delete :destroy, params: { id: post.to_param }, session: valid_session
       end.to change(Users::Post, :count).by(-1)
     end
 
-    it "redirects to the users_posts list" do
+    xit "redirects to the users_posts list" do
       post = Users::Post.create! valid_attributes
       delete :destroy, params: { id: post.to_param }, session: valid_session
       expect(response).to redirect_to(users_posts_url)
