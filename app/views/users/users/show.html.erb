@@ -44,7 +44,7 @@
           <li class="nav-item"><%= link_to 'コメント', nil, class: 'nav-link' %></li>
         </ul>
         <ul class="list-group list-group-flush">
-          <% Post.all.limit(20).each do |post| %>
+          <% @user.recently_posts.each do |post| %>
             <%= render 'post', user: @user, post: post %>
           <% end %>
         </ul>

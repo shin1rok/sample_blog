@@ -26,4 +26,5 @@ class Post < ApplicationRecord
 
   scope :drafts, -> { where(status: :draft) }
   scope :latest_draft, -> { order(updated_at: :desc).first }
+  scope :recently_posts, -> { where(status: :published).order(created_at: :desc) }
 end

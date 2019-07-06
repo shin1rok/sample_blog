@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :drafts, -> { drafts }, class_name: 'Post'
+  has_many :recently_posts, -> { recently_posts }, class_name: 'Post'
 end
