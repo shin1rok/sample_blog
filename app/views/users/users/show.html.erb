@@ -22,20 +22,20 @@
     <div class="card">
       <%= image_tag('pie_chart.png', class: 'card-img-top') %>
       <div class="card-body">
-      <nav class="nav nav-pills nav-justified">
-        <a class="nav-item nav-link active" href="#">
-          <p>100</p>
-          <p>Items</p>
-        </a>
-        <a class="nav-item nav-link" href="#">
-          <p>100</p>
-          <p>Contribution</p>
-        </a>
-        <a class="nav-item nav-link" href="#">
-          <p>100</p>
-          <p>Followers</p>
-        </a>
-      </nav>
+        <nav class="nav nav-pills nav-justified">
+          <a class="nav-item nav-link active" href="#">
+            <p>100</p>
+            <p>Items</p>
+          </a>
+          <a class="nav-item nav-link" href="#">
+            <p>100</p>
+            <p>Contribution</p>
+          </a>
+          <a class="nav-item nav-link" href="#">
+            <p>100</p>
+            <p>Followers</p>
+          </a>
+        </nav>
       </div>
       <div class="card-body">
         <ul class="nav nav-tabs">
@@ -44,10 +44,13 @@
           <li class="nav-item"><%= link_to 'コメント', nil, class: 'nav-link' %></li>
         </ul>
         <ul class="list-group list-group-flush">
-          <% @user.recently_posts.each do |post| %>
+          <% @recently_posts.each do |post| %>
             <%= render 'post', user: @user, post: post %>
           <% end %>
         </ul>
+        <div class="mt-3">
+          <%= paginate @recently_posts %>
+        </div>
       </div>
     </div>
   </div>
