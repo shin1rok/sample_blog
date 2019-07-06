@@ -14,5 +14,8 @@ jobs:
           docker-compose run web rails db:create RAILS_ENV=test
           docker-compose run web rails db:migrate RAILS_ENV=test
     - run:
+        name: rspec
+        command: docker-compose run web rspec
+    - run:
         name: rubocop
         command: docker-compose run web rubocop
