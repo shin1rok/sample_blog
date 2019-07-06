@@ -38,7 +38,7 @@ class Users::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to users_drafts_path(current_user.url_name), notice: '削除しました。'
+    redirect_to user_name_drafts_path(current_user.url_name), notice: '削除しました。'
   end
 
   private
