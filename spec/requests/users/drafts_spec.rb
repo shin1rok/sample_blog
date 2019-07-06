@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "Users::Posts", type: :request do
-  describe "GET /users/posts" do
+RSpec.describe "Users::Drafts", type: :request do
+  describe "GET /users/drafts" do
     xit "works! (now write some real specs)" do
-      get users_posts_path
+      get users_drafts_path
       expect(response).to have_http_status(200)
     end
   end

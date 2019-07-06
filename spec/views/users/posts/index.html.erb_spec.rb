@@ -8,7 +8,7 @@ RSpec.describe "users/posts/index", type: :view do
            ])
   end
 
-  it "renders a list of users/posts" do
+  xit "renders a list of users/posts" do
     render
   end
 end

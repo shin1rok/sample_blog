@@ -5,7 +5,7 @@ RSpec.describe "users/posts/new", type: :view do
     assign(:users_post, Users::Post.new())
   end
 
-  it "renders new users_post form" do
+  xit "renders new users_post form" do
     render
 
     assert_select "form[action=?][method=?]", users_posts_path, "post" do
