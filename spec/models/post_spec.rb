@@ -27,12 +27,12 @@ RSpec.describe Post, type: :model do
         let!(:post) { build(:post, content: nil) }
         it { is_expected.to be_falsey }
       end
-      context '65535文字以内の場合' do
-        let!(:post) { build(:post, content: 'あ' * 65_535) }
+      context '100000文字以内の場合' do
+        let!(:post) { build(:post, content: 'あ' * 100_000) }
         it { is_expected.to be_truthy }
       end
-      context '65535文字より多いの場合' do
-        let!(:post) { build(:post, content: 'あ' * 65_536) }
+      context '100000文字より多いの場合' do
+        let!(:post) { build(:post, content: 'あ' * 100_001) }
         it { is_expected.to be_falsey }
       end
     end
