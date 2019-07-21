@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   enum status: { draft: 0, published: 1, restricted: 2, unpublished: 3 }
 
   validates :title, presence: true, length: { maximum: 256 }
-  validates :content, presence: true, length: { maximum: 65_535 }
+  validates :content, presence: true, length: { maximum: 100_000 }
 
   scope :trends, ->(scope) do
     case scope&.to_sym

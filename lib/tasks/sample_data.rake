@@ -22,7 +22,7 @@ namespace :sample_data do
     users = User.order(id: :asc).limit(5)
     30.times do |n|
       Post.create!(title:   "タイトル#{n}",
-                   content: "コンテンツ#{n}",
+                   content: Faker::Lorem.paragraph(3, false, 10),
                    user_id: users.sample.id,
                    status:  Post.statuses.to_a.sample[0])
     end

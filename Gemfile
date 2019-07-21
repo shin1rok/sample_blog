@@ -50,6 +50,8 @@ group :development, :test do
   gem 'factory_bot_rails'
 
   gem 'rubocop', '~> 0.71.0'
+
+  gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
 end
 
 group :development do
