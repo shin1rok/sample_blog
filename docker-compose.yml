@@ -3,11 +3,11 @@ services:
   web:
     build:
       context: .
+    image: web
     environment:
       - DB_HOST=db
     volumes:
       - ${RAILS_VOLUME:-.:/sample_blog}
-      - bundle_volume:/usr/local/bundle
     networks:
       - sample_blog
     ports:
@@ -24,7 +24,6 @@ services:
     ports:
       - 15434:5432
 volumes:
-  bundle_volume:
   db_volume:
 networks:
   sample_blog:
